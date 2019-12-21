@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 
 #Defining Variables
-current_player="p1"
+current_player=""
 game_started=False
 p1_name=""
 p2_name=""
@@ -12,15 +12,20 @@ def display_help():
 
 def set_player():
     global current_player
+    global info_label
     if current_player == "p1":
         current_player = "p2"
+        info_label.config(text=p2_name+"'s turn")
     else:
         current_player = "p1"
+        info_label.config(text=p1_name+"'s turn")
 
 def start_stop():
     global game_started
     global p1_name, p2_name
     global p1_box, p2_box
+    global info_label
+    global current_player
     tname1 = p1_box.get()
     tname2 = p2_box.get()
     if game_started == False:
@@ -29,9 +34,16 @@ def start_stop():
             p2_name = tname2
             game_started = True
             playstop_text.set("Stop Game")
+            set_player()
     else:
         game_started = False
-        playstop_text.set("Start Game")   
+        p1_name = ""
+        p2_name = ""
+        current_player = ""
+        p1_box.delete(0, END)
+        p2_box.delete(0, END)
+        info_label.config(text="Click Start Game to start playing!")
+        playstop_text.set("Start Game")
 
 
 
@@ -61,7 +73,7 @@ p2_box.grid(row=2, column=1)
 help = Button(window, text='Help', width=10, command=display_help)
 help.grid(row = 2, column = 2)
 
-info_label = Label(text="Vishal to play", font=("Helvetica", 16))
+info_label = Label(text="Click Start Game to start playing!", font=("Helvetica", 16))
 info_label.grid(row=3, columnspan=3)
 
 

@@ -3,7 +3,9 @@ from tkinter import messagebox
 
 #Defining Variables
 current_player="p1"
-
+game_started=False
+p1_name=""
+p2_name=""
 #Functions
 def display_help():
     messagebox.showinfo("Help", "This is a simple Tic Tac Toe Game. To start, enter the Names of the players and click on Start Game")
@@ -15,26 +17,46 @@ def set_player():
     else:
         current_player = "p1"
 
+def start_stop():
+    global game_started
+    global p1_name, p2_name
+    global p1_box, p2_box
+    tname1 = p1_box.get()
+    tname2 = p2_box.get()
+    if game_started == False:
+        if tname1 != "" and tname2 != "":
+            p1_name = tname1
+            p2_name = tname2
+            game_started = True
+            playstop_text.set("Stop Game")
+    else:
+        game_started = False
+        playstop_text.set("Start Game")   
+
+
+
 #Main program starts here
 #Configuring the UI
 window = Tk()
 window.title("Tic-Tac Toe")
-window.geometry("625x635")
+window.geometry("565x635")
 
 label = Label(text="Player 1:", font=("Helvetica", 16))
 label.grid(row=1, column=0)
 
-p1_name = Entry()
-p1_name.grid(row=1, column=1)
+p1_box = Entry()
+p1_box.grid(row=1, column=1)
 
-play = Button(window, text='Start Game', width=10)
-play.grid(row = 1, column = 2) 
+playstop_text = StringVar()
+playstop = Button(window, textvariable=playstop_text, width=10, command=start_stop)
+playstop_text.set("Start Game")
+playstop.grid(row = 1, column = 2) 
 
 label = Label(text="Player 2:", font=("Helvetica", 16))
 label.grid(row=2, column=0)
 
-p2_name = Entry()
-p2_name.grid(row=2, column=1)
+p2_box = Entry()
+p2_box.grid(row=2, column=1)
 
 help = Button(window, text='Help', width=10, command=display_help)
 help.grid(row = 2, column = 2)

@@ -32,6 +32,26 @@ def set_player():
         current_player = "p1"
         info_label.config(text=p1_name+"'s turn")
 
+def stopgame():
+    global game_started
+    global p1_name, p2_name
+    global p1_box, p2_box
+    global info_label
+    global current_player
+    global b_status
+    p1_box.config(state='normal')
+    p2_box.config(state='normal')
+    p1_name = ""
+    p2_name = ""
+    current_player = ""
+    b_status = ["","","","","","","","",""]
+    game_started=False
+    p1_box.delete(0, END)
+    p2_box.delete(0, END)
+    info_label.config(text="Click Start Game to start playing!")
+    boxes_config("disabled")
+    playstop_text.set("Start Game")
+
 def start_stop():
     global game_started
     global p1_name, p2_name
@@ -52,18 +72,87 @@ def start_stop():
             set_player()
             boxes_config("active")
     else:
-        game_started = False
-        p1_box.config(state='normal')
-        p2_box.config(state='normal')
-        p1_name = ""
-        p2_name = ""
-        current_player = ""
-        b_status = ["","","","","","","","",""]
-        p1_box.delete(0, END)
-        p2_box.delete(0, END)
-        info_label.config(text="Click Start Game to start playing!")
-        boxes_config("disabled")
-        playstop_text.set("Start Game")
+        stopgame()
+
+def isGameover():
+    if checkWinner() != True:
+        for i in b_status:
+            print(i)
+            if i == "":
+                return False
+        return True
+    else:
+        return False
+
+def checkWinner():
+    if b_status[0] == "p1" and b_status[1] == "p1" and b_status[2] == "p1":
+        messagebox.showinfo("Game Over", "Game Over "+p1_name+" is the winner")
+        stopgame()
+        return True
+    elif b_status[0] == "p2" and b_status[1] == "p2" and b_status[2] == "p2":
+        messagebox.showinfo("Game Over", "Game Over "+p2_name+" is the winner")
+        stopgame()
+        return True
+    elif b_status[3] == "p1" and b_status[4] == "p1" and b_status[5] == "p1":
+        messagebox.showinfo("Game Over", "Game Over "+p1_name+" is the winner")
+        stopgame()
+        return True
+    elif b_status[3] == "p2" and b_status[4] == "p2" and b_status[5] == "p2":
+        messagebox.showinfo("Game Over", "Game Over "+p2_name+" is the winner")
+        stopgame()
+        return True
+    elif b_status[6] == "p1" and b_status[7] == "p1" and b_status[8] == "p1":
+        messagebox.showinfo("Game Over", "Game Over "+p1_name+" is the winner")
+        stopgame()
+        return True
+    elif b_status[6] == "p2" and b_status[7] == "p2" and b_status[8] == "p2":
+        messagebox.showinfo("Game Over", "Game Over "+p2_name+" is the winner")
+        stopgame()
+        return True
+    elif b_status[0] == "p1" and b_status[3] == "p1" and b_status[6] == "p1":
+        messagebox.showinfo("Game Over", "Game Over "+p1_name+" is the winner")
+        stopgame()
+        return True
+    elif b_status[0] == "p2" and b_status[3] == "p2" and b_status[6] == "p2":
+        messagebox.showinfo("Game Over", "Game Over "+p2_name+" is the winner")
+        stopgame()
+        return True
+    elif b_status[1] == "p1" and b_status[4] == "p1" and b_status[7] == "p1":
+        messagebox.showinfo("Game Over", "Game Over "+p1_name+" is the winner")
+        stopgame()
+        return True
+    elif b_status[1] == "p2" and b_status[4] == "p2" and b_status[7] == "p2":
+        messagebox.showinfo("Game Over", "Game Over "+p2_name+" is the winner")
+        stopgame()
+        return True
+    elif b_status[2] == "p1" and b_status[5] == "p1" and b_status[8] == "p1":
+        messagebox.showinfo("Game Over", "Game Over "+p2_name+" is the winner")
+        stopgame()
+        return True
+    elif b_status[2] == "p2" and b_status[5] == "p2" and b_status[8] == "p2":
+        messagebox.showinfo("Game Over", "Game Over "+p2_name+" is the winner")
+        stopgame()
+        return True
+    elif b_status[0] == "p1" and b_status[4] == "p1" and b_status[8] == "p1":
+        messagebox.showinfo("Game Over", "Game Over "+p1_name+" is the winner")
+        stopgame()
+        return True
+    elif b_status[0] == "p2" and b_status[4] == "p2" and b_status[8] == "p2":
+        messagebox.showinfo("Game Over", "Game Over "+p2_name+" is the winner")
+        stopgame()
+        return True
+    elif b_status[2] == "p1" and b_status[4] == "p1" and b_status[6] == "p1":
+        messagebox.showinfo("Game Over", "Game Over "+p1_name+" is the winner")
+        stopgame()
+        return True
+    elif b_status[2] == "p2" and b_status[4] == "p2" and b_status[6] == "p2":
+        messagebox.showinfo("Game Over", "Game Over "+p2_name+" is the winner")
+        stopgame()
+        return True
+    else:
+        return False
+
+
 
 def b0_click():
     global b0
@@ -76,6 +165,10 @@ def b0_click():
         b_status[bval] = "p2"
         b0.config(text="O", state='disabled')
     set_player()
+    if isGameover() == True:
+        messagebox.showinfo("Game Over", "Game Over")
+        stopgame()
+
 
 def b1_click():
     global b1
@@ -88,6 +181,8 @@ def b1_click():
         b_status[bval] = "p2"
         b1.config(text="O", state='disabled')
     set_player()
+    if isGameover() == True:
+        messagebox.showinfo("Game Over", "Game Over")
 
 def b2_click():
     global b2
@@ -100,6 +195,8 @@ def b2_click():
         b_status[bval] = "p2"
         b2.config(text="O", state='disabled')
     set_player()
+    if isGameover() == True:
+        messagebox.showinfo("Game Over", "Game Over")
 
 def b3_click():
     global b0
@@ -112,6 +209,8 @@ def b3_click():
         b_status[bval] = "p2"
         b3.config(text="O", state='disabled')
     set_player()
+    if isGameover() == True:
+        messagebox.showinfo("Game Over", "Game Over")
 
 def b4_click():
     global b4
@@ -124,6 +223,8 @@ def b4_click():
         b_status[bval] = "p2"
         b4.config(text="O", state='disabled')
     set_player()
+    if isGameover() == True:
+        messagebox.showinfo("Game Over", "Game Over")
 
 def b5_click():
     global b5
@@ -136,6 +237,8 @@ def b5_click():
         b_status[bval] = "p2"
         b5.config(text="O", state='disabled')
     set_player()
+    if isGameover() == True:
+        messagebox.showinfo("Game Over", "Game Over")
         
 def b6_click():
     global b6
@@ -148,6 +251,8 @@ def b6_click():
         b_status[bval] = "p2"
         b6.config(text="O", state='disabled')
     set_player()
+    if isGameover() == True:
+        messagebox.showinfo("Game Over", "Game Over")
 
 def b7_click():
     global b7
@@ -160,6 +265,8 @@ def b7_click():
         b_status[bval] = "p2"
         b7.config(text="O", state='disabled')
     set_player()
+    if isGameover() == True:
+        messagebox.showinfo("Game Over", "Game Over")
 
 def b8_click():
     global b8
@@ -172,6 +279,8 @@ def b8_click():
         b_status[bval] = "p2"
         b8.config(text="O", state='disabled')
     set_player()
+    if isGameover() == True:
+        messagebox.showinfo("Game Over", "Game Over")
 
 #Main program starts here
 #Configuring the UI

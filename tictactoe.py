@@ -8,8 +8,10 @@ p1_name=""
 p2_name=""
 #Functions
 def display_help():
+    """
     messagebox.showinfo("Help", "This is a simple Tic Tac Toe Game. To start, enter the Names of the players and click on Start Game")
-
+    """
+    b0.configure(state='disabled')
 def set_player():
     global current_player
     global info_label
@@ -77,7 +79,7 @@ info_label = Label(text="Click Start Game to start playing!", font=("Helvetica",
 info_label.grid(row=3, columnspan=3)
 
 
-b0 = Button(window, text='', width=20, height=10)
+b0 = Button(window, text='hi', width=20, height=10)
 b0.grid(row = 4, column = 0) 
 
 b1 = Button(window, text='', width=20, height=10) 

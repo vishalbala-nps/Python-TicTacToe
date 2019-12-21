@@ -77,7 +77,6 @@ def start_stop():
 def isGameover():
     if checkWinner() != True:
         for i in b_status:
-            print(i)
             if i == "":
                 return False
         return True

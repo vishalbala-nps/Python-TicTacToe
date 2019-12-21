@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=Tic Tac Toe
+Comment=A Tic Tac Toe game written in Python with tkinter
+Exec=/usr/bin/tictactoe
+Icon=/usr/share/icons/tictactoe/tic-tac-toe.png
+Categories=Game;
+Terminal=false

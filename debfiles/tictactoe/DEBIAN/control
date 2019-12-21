@@ -1,0 +1,7 @@
+Package: tictactoe
+Version: 1.0.0
+Maintainer: Vishal Balasubramanian <vishal.bala.test@gmail.com>
+Description: A Tic Tac Toe game written in Python using tkinter
+Homepage: https://github.com/vishalbala-nps/Python-TicTacToe
+Architecture: all
+Depends: python3, python3-tk
